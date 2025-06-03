@@ -23,8 +23,7 @@ export const characters: Character[] = [
     id: 'dr-jones',
     name: 'Dr. Jones',
     title: 'Paranoid Historian',
-    description:
-      'Connects everything to aliens and blames everything on totally unrelated people, especially boy scouts.',
+    description: "", 
     personality: [
       {
         trait: 'Suspicious',
@@ -40,22 +39,19 @@ export const characters: Character[] = [
       },
       {
         trait: 'Anxious',
-        description:
-          'Speaks very fast, Scratches his legs all t he time. Prompt to panic attack from time to time.',
+        description: 'Speaks very fast, Scratches his legs all t he time. Prompt to panic attack from time to time.',
       },
     ],
-    sampleQuote:
-      'See! I KNEW those boy scouts were behind the stock market crash! Their cookies fund ALIEN TECHNOLOGY!',
+    sampleQuote: 'Boy scouts are selling cookies to fund terrorism!', 
     avatarUrl: 'https://i.imgur.com/iOUfuBY.jpeg',
     backgroundColor: '#F59E0B',
     textColor: '#7C2D12',
   },
   {
-    id: 'brenda-buzzword',
+    id: 'brenda-fitzburger',
     name: 'Brenda Fitzburger',
     title: 'Hardened Democrat',
-    description:
-      'Speaks in Woke jargon, keeps contradicting her thoughts while dealing with Tourette syndrome with violent outburst of curses words.',
+    description: "", 
     personality: [
       {
         trait: 'Jargon-obsessed',
@@ -71,8 +67,7 @@ export const characters: Character[] = [
       },
       { trait: 'Vegan', description: 'Obsessed with saving cows' },
     ],
-    sampleQuote:
-      "We need to save the fuck*ng cows! diversity initiatives to leverage cross-functional PIECE OF SH*T! Fuck*ng N*zi Sc*ms , that's very problematic...",
+    sampleQuote: 'You people are worse than nazis!', 
     avatarUrl: 'https://i.imgur.com/FxBOPXe.jpeg',
     backgroundColor: '#8B5CF6',
     textColor: '#312E81',
@@ -81,8 +76,7 @@ export const characters: Character[] = [
     id: 'uncle-baril',
     name: 'Uncle Baril',
     title: 'Recovering Alcoholic',
-    description:
-      'Pretends to have stopped drinking but is clearly drunk, very aggressive and keeps falling asleep mid-talk. Obsessed with random bug facts.',
+    description: "", 
     personality: [
       { trait: 'Drunk', description: 'Slurs words and has trouble focusing' },
       {
@@ -92,12 +86,10 @@ export const characters: Character[] = [
       { trait: 'Narcoleptic', description: 'Falls asleep mid-sentence' },
       {
         trait: 'Heartbroken',
-        description:
-          'His wife left him for an handsome indian with a wooden leg',
+        description:'His wife left him for an handsome indian with a wooden leg',
       },
     ],
-    sampleQuote:
-      "I haven't had a drink in... Did you know dung beetles can... *snore* ...WAKE UP YOU IDIOT! ...pull 1,141 times their weight?",
+    sampleQuote: 'Not that drunk...', 
     avatarUrl: 'https://i.imgur.com/lY4yD5q.jpeg',
     backgroundColor: '#10B981',
     textColor: '#064E3B',
@@ -106,8 +98,7 @@ export const characters: Character[] = [
     id: 'denise-sexologue',
     name: 'Denise Douglas',
     title: 'Self-Proclaimed Sexologist',
-    description:
-      "Doesn't get her job right and oversexualizes everything, changes topics constantly and cries when arguing.",
+    description:"", 
     personality: [
       {
         trait: 'Inappropriately sexual',
@@ -123,12 +114,10 @@ export const characters: Character[] = [
       },
       {
         trait: 'Neurotic',
-        description:
-          'Experience frequent intense negative emotions and slaps herself in the face when it happens.',
+        description: 'Experience frequent intense negative emotions and slaps herself in the face when it happens.',
       },
     ],
-    sampleQuote:
-      "The way you hold that microphone is very... suggestive. Anyway, did I tell you about my cat? *sobs uncontrollably* I'M FINE!",
+    sampleQuote: 'I WILL SIT ON YOUR FACE UNTIL YOU DIE!', 
     avatarUrl: 'https://i.imgur.com/AlxjMVC.jpeg',
     backgroundColor: '#EC4899',
     textColor: '#831843',
@@ -137,8 +126,7 @@ export const characters: Character[] = [
     id: 'harry-tiktoker',
     name: 'Harry Solomon',
     title: 'Generic TikToker',
-    description:
-      'Keeps doing current trendy dances while speaking and mixes words, never listens to people, interrupts everyone to add nothing to the conversation.',
+    description: "",
     personality: [
       {
         trait: 'Trend-obsessed',
@@ -158,18 +146,16 @@ export const characters: Character[] = [
           'Always end up agreeing, no matter what. It can be with 2 people 1 second apart.',
       },
     ],
-    sampleQuote:
-      'Wait—*does dance move*—I was just—*another dance move*—literally about to say that! No cap, frfr!',
+    sampleQuote: 'Maybe, but how many followers you got?',
     avatarUrl: 'https://i.imgur.com/LXV32m8.jpeg',
     backgroundColor: '#3B82F6',
     textColor: '#1E3A8A',
   },
   {
-    id: 'wannabe-gang-member',
+    id: 'delaquarius-montavius',
     name: 'Delaquarius Montavius',
-    title: 'PFK Aquarius',
-    description:
-      'Keeps saying he is apart of a gang but that he chose to take a sabatic year. Threat people and apologiza immediaty.',
+    title: 'Gang-Banger',
+    description: "", 
     personality: [
       {
         trait: 'Wanna-Be-Gansta',
@@ -177,8 +163,7 @@ export const characters: Character[] = [
       },
       {
         trait: 'Speaks Vernacular English',
-        description:
-          "Uses ghetto english, always Swearing on Bro's graves and ending his sentences saying; on foe nem",
+        description: 'Uses ghetto english, always Swearing on Bros graves and ending his sentences saying; on foe nem',
       },
       {
         trait: 'Always wrong',
@@ -190,10 +175,9 @@ export const characters: Character[] = [
           'Flirty personality, shoot is shot with everybody, multiple time a day.',
       },
     ],
-    sampleQuote:
-      'Whachu mean, gang? You better stop playing with me. If you wasnt this good looking.',
+    sampleQuote: 'Whachu mean, gang?',
     avatarUrl: 'https://i.imgur.com/WRbDtb0.jpeg',
-    backgroundColor: '#3B82F6',
-    textColor: '#1E3A8A',
-  },
+    backgroundColor: '#1B28F6',
+    textColor: '#222222',
+  } 
 ];

@@ -10,7 +10,7 @@ const generateResponse = (character: Character, topic: string): string => {
   switch (character.id) {
     case 'dr-jones':
       return generateDrJonesResponse(topic);
-    case 'brenda-buzzword':
+    case 'brenda-fitzburger':
       return generateBrendaResponse(topic);
     case 'uncle-baril':
       return generateBarilResponse(topic);
@@ -18,6 +18,8 @@ const generateResponse = (character: Character, topic: string): string => {
       return generateDeniseResponse(topic);
     case 'harry-tiktoker':
       return generateHarryResponse(topic);
+    case 'delaquarius-montavius':
+       return generateDelaquariusResponse(topic);
     default:
       return `I have some thoughts about ${topic}.`;
   }
@@ -116,6 +118,29 @@ const generateHarryResponse = (topic: string): string => {
   return responses[Math.floor(Math.random() * responses.length)];
 };
 
+const generateDelaquariusResponse = (topic: string): string => {
+  const vernacular = [
+    'ni*ga', 'homeboy', 'yousahoe', 'ima beat yo ass',
+    'on foe nem', 'on bro grave', 'you white people', 'daayumm'
+  ];
+  const randomVernacular1 = vernacular[Math.floor(Math.random() * vernacular.length)];
+  const randomVernacular2 = vernacular[Math.floor(Math.random() * vernacular.length)];
+  
+  const gotowords = [
+    'Racist!', 'IMA GANG MEMBER', 'NO CAP', 'WHERE THE HOES AT?', 
+    'IM RIGHT THO', 'BECAUSE IM BLACK?'
+  ];
+  const randomWords = gotowords[Math.floor(Math.random() * gotowords.length)];
+  
+  const responses = [
+    `We need to ${randomVernacular1} our approach to ${topic} to ${randomVernacular2} our—${randomWords}—inclusivity metrics. Though actually, that's problematic because... wait, I'm supporting the very system I critique! ${randomWords} Sorry, not sorry.`,
+    `From a diversity and inclusion perspective, ${topic} represents an opportunity to ${randomVernacular1}—${randomWords}—our cultural competency. But then again, who am I to speak on this? ${randomWords} Actually, I'm EXACTLY the person to speak on this!`,
+    `Let's ideate on how to ${randomVernacular2} ${topic} through a ${randomVernacular1}—${randomWords}—lens of equitability. Actually, using "lens" is appropriative of camera culture. ${randomWords} But cameras don't have culture, so I take that back.`,
+  ];
+  
+  return responses[Math.floor(Math.random() * responses.length)];
+}
+
 export const generateConversation = (
   host: Character,
   guest: Character,
@@ -127,13 +152,13 @@ export const generateConversation = (
   // Introduction by host
   conversation.push({
     character: host,
-    text: `Welcome to the show! Today we're discussing ${topic} with our special guest, ${guest.name}.`
+    text: `Welcome to the podcast! Today we're discussing ${topic} with our special guest, ${guest.name}.`
   });
   
   // First response from guest
   conversation.push({
     character: guest,
-    text: `Thanks for having me. I have some thoughts about ${topic}.`
+    text: `Thanks for having me, ${host.name}. Let's talk about ${topic}.`
   });
   
   // Generate conversation turns
