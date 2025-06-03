@@ -15,7 +15,7 @@ interface ConversationDisplayProps {
   topic: string;
   onTogglePlay: () => void;
   onRegenerate: () => void;
-  elevenLabsApiKey?: string;
+  elevenLabsKey?: string;
 }
 
 interface AudioSegment {
@@ -41,7 +41,7 @@ class ConversationTTS {
   private voiceMapping: Map<string, string> = new Map();
 
   constructor(apiKey: string) {
-    this.apiKey = apiKey;
+    this.apiKey = elevenLabsKey;
     this.setDefaultVoices();
   }
 
