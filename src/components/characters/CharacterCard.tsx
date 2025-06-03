@@ -27,7 +27,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
       }}
       onClick={onClick}
     >
-      <div className="p-6 text-white">
+      <div className="p-6 text-neutral-900">
         <div className="flex items-start mb-4">
           <div 
             className="w-20 h-20 rounded-full overflow-hidden border-4 flex-shrink-0"
@@ -53,7 +53,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
         <div className="mb-4">
           <p 
             className="text-sm leading-relaxed opacity-90 mb-3"
-            style={{ color: 'rgba(255,255,255,0.9)' }}
+            style={{ color: '#212121' }}
           >
             {character.description}
           </p>
@@ -97,7 +97,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
       </div>
       
       {isSelected && (
-        <div className="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+        <div className="absolute top-3 right-3 bg-primary text-neutral-800 text-xs font-bold px-2 py-1 rounded-full">
           Selected
         </div>
       )}

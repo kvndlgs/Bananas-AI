@@ -10,13 +10,12 @@ const Header: React.FC = () => {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 py-2">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <Banana className="h-8 w-8 text-primary" />
-              <span className="ml-2 text-2xl font-display font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Bananas
-              </span>
+
+                <img src='https://i.imgur.com/3YgTIAG.png' alt='logo' className='w-20 mt-1' />
+  
             </Link>
             <div className="hidden md:block ml-10">
               <nav className="flex space-x-4">
@@ -32,12 +31,7 @@ const Header: React.FC = () => {
                 >
                   Create Podcast
                 </Link>
-                <Link
-                  to="/customcharacters"
-                  className="px-3 py-2 text-sm font-medium text-neutral-700 hover:text-primary transition-colors duration-200"
-                >
-                  Create Characters
-                </Link>
+       
               </nav>
             </div>
           </div>

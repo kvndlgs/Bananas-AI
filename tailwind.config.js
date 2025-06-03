@@ -18,6 +18,18 @@ export default {
           light: '#FF9E75',
           dark: '#E06432',
         },
+        banana: {
+          DEFAULT: '#FFF942',
+          100: '#FFFEDB',
+          200: '#FFFCA8',
+          300: '#FFFA75',
+          400: '#FFF942',
+          500: '#FFF70F',
+          600: '#DBD400',
+          700: '#B8B100',
+          800: '#A8A300',
+          900: '#757100',
+        },
         secondary: {
           DEFAULT: '#8A69FC',
           100: '#EBE6FE',

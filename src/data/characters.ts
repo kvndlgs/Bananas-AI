@@ -119,8 +119,8 @@ export const characters: Character[] = [
     ],
     sampleQuote: 'I WILL SIT ON YOUR FACE UNTIL YOU DIE!', 
     avatarUrl: 'https://i.imgur.com/AlxjMVC.jpeg',
-    backgroundColor: '#EC4899',
-    textColor: '#831843',
+    backgroundColor: '#535157',
+    textColor: '#FFFFFF',
   },
   {
     id: 'harry-tiktoker',
@@ -148,8 +148,8 @@ export const characters: Character[] = [
     ],
     sampleQuote: 'Maybe, but how many followers you got?',
     avatarUrl: 'https://i.imgur.com/LXV32m8.jpeg',
-    backgroundColor: '#3B82F6',
-    textColor: '#1E3A8A',
+    backgroundColor: '#8A69FC',
+    textColor: '#D8CDFE',
   },
   {
     id: 'delaquarius-montavius',
@@ -177,7 +177,7 @@ export const characters: Character[] = [
     ],
     sampleQuote: 'Whachu mean, gang?',
     avatarUrl: 'https://i.imgur.com/WRbDtb0.jpeg',
-    backgroundColor: '#1B28F6',
-    textColor: '#222222',
+    backgroundColor: '#FFF70F',
+    textColor: '#A8A300',
   } 
 ];
