@@ -90,6 +90,7 @@ export const characters: Character[] = [
       },
     ],
     sampleQuote: 'Not that drunk...', 
+
     avatarUrl: 'https://i.imgur.com/lY4yD5q.jpeg',
     backgroundColor: '#10B981',
     textColor: '#064E3B',

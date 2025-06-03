@@ -2,12 +2,41 @@ import React, { useState } from 'react';
 import { Mic, Sparkles } from 'lucide-react';
 import Button from '../ui/Button';
 import { Character } from '../../data/characters';
+import { PodcastTTS, ConversationSegment } from '../../utils/textToSpeech';
 
 interface InterviewFormProps {
   selectedHost?: Character;
   selectedGuest?: Character;
   onCreateInterview: (topic: string) => void;
   isGenerating: boolean;
+}
+
+// Usage Example
+async function example(): Promise<void> {
+  const tts = new PodcastTTS(`${process.env.VITE_ELEVENLABS_API_KEY}`);
+  
+  // Example conversation data
+  const conversation: ConversationSegment[] = [
+    { speaker: 'host', text: 'Welcome to our podcast! Today we have an amazing guest with us.' },
+    { speaker: 'guest', text: 'Thank you for having me! I\'m excited to be here.' },
+    { speaker: 'host', text: 'Let\'s dive right in. Can you tell us about your background?' },
+    { speaker: 'guest', text: 'Absolutely! I started my career in tech about ten years ago...' }
+  ];
+  
+  try {
+    // Process the conversation
+    console.log('Generating audio for conversation...');
+    const audioSegments = await tts.processConversation(conversation);
+    
+    // Play the conversation
+    console.log('Playing conversation...');
+    await tts.playConversation(audioSegments);
+    
+    console.log('Conversation playback complete!');
+    
+  } catch (error) {
+    console.error('Error processing conversation:', error);
+  }
 }
 
 const InterviewForm: React.FC<InterviewFormProps> = ({
