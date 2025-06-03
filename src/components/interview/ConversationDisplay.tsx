@@ -3,7 +3,7 @@ import { Play, Pause, RefreshCw, Volume2, Download } from 'lucide-react';
 import Button from '../ui/Button';
 import { Character } from '../../data/characters';
 
-const elevenLabsKey = process.env.VITE_ELEVENLABS_API_KEY;
+const elevenLabsKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
 
 interface ConversationTurn {
   character: Character;
