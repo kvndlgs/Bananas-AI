@@ -46,12 +46,12 @@ class ConversationTTS {
   }
 
   private setDefaultVoices() {
-    this.voiceMapping.set('dr-jones', 'nPczCjzI2devNBz1zQrb');
+    this.voiceMapping.set('dr-jones', 'gsyHQ9kWCDIipR26RqQ1');
     this.voiceMapping.set('harry-tiktoker', 'yoZ06aMxZJJ28mfd3POQ');
-    this.voiceMapping.set('denise-sexologue', 'TX3LPaxmHKxFdv7VOQHJ');
-    this.voiceMapping.set('brenda-fitzburger', 'AZnzlk1XvdvUeBnXmlld');
-    this.voiceMapping.set('uncle-baril', 'N2lVS1w4EtoT3dr4eOWO');
-    this.voiceMapping.set('delaquarius-montavius', 'Zlb1dXrM653N07WRdFW3');
+    this.voiceMapping.set('denise-sexologue', 'FeJtVBW106P4mvgGebAg');
+    this.voiceMapping.set('brenda-fitzburger', 'L4ndSW2PzthljqHuvso3');
+    this.voiceMapping.set('uncle-baril', 'OYWwCdDHouzDwiZJWOOu');
+    this.voiceMapping.set('delaquarius-montavius', '6OzrBCQf8cjERkYgzSg8');
   }
 
   setVoiceForCharacter(characterName: string, voiceId: string) {
