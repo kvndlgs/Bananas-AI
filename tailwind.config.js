@@ -19,16 +19,16 @@ export default {
           dark: '#E06432',
         },
         banana: {
-          DEFAULT: '#FFF942',
-          100: '#FFFEDB',
-          200: '#FFFCA8',
-          300: '#FFFA75',
-          400: '#FFF942',
-          500: '#FFF70F',
-          600: '#DBD400',
-          700: '#B8B100',
-          800: '#A8A300',
-          900: '#757100',
+          DEFAULT: '#FBE065',
+          100: '#FEFAE6',
+          200: '#FDF0B4',
+          300: '#FCE683',
+          400: '#FBE065',
+          500: '#FBDB51',
+          600: '#7C6603',
+          700: '#7C6603',
+          800: '#4B3D02',
+          900: '#191401',
         },
         secondary: {
           DEFAULT: '#8A69FC',
@@ -66,6 +66,10 @@ export default {
       fontFamily: {
         sans: ['Prompt', 'sans-serif'],
         display: ['"Prompt"', 'sans-serif'],
+      },
+      fontSize: {
+        xs: '13px',
+        sm: '16px'
       },
       animation: {
         'bounce-slow': 'bounce 3s infinite',
