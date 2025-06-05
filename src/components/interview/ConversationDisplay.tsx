@@ -3,7 +3,9 @@ import { Play, Pause, RefreshCw, Volume2, Download } from 'lucide-react';
 import Button from '../ui/Button';
 import { Character } from '../../data/characters';
 
-const elevenLabsKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
+
+const elevenLabsKey = process.env.VITE_ELEVENLABS_API_KEY || import.meta.env.VITE_ELEVENLABS_API_KEY;
+
 
 interface ConversationTurn {
   character: Character;
@@ -41,17 +43,26 @@ class ConversationTTS {
   private voiceMapping: Map<string, string> = new Map();
 
   constructor(apiKey: string) {
-    this.apiKey = elevenLabsKey;
+    this.apiKey = apiKey; // ✅ Fixed: Use the passed parameter instead of elevenLabsKey
     this.setDefaultVoices();
   }
 
   private setDefaultVoices() {
+    // Map by character ID (which matches your character data)
     this.voiceMapping.set('dr-jones', 'gsyHQ9kWCDIipR26RqQ1');
-    this.voiceMapping.set('harry-tiktoker', 'yoZ06aMxZJJ28mfd3POQ');
+    this.voiceMapping.set('harry-tiktoker', 'yoZ06aMxZJJ28mfd3POQ'); 
     this.voiceMapping.set('denise-sexologue', 'FeJtVBW106P4mvgGebAg');
     this.voiceMapping.set('brenda-fitzburger', 'L4ndSW2PzthljqHuvso3');
     this.voiceMapping.set('uncle-baril', 'OYWwCdDHouzDwiZJWOOu');
     this.voiceMapping.set('delaquarius-montavius', '6OzrBCQf8cjERkYgzSg8');
+    
+    // Also map by character name as backup
+    this.voiceMapping.set('dr. jones', 'gsyHQ9kWCDIipR26RqQ1');
+    this.voiceMapping.set('harry solomon', 'yoZ06aMxZJJ28mfd3POQ');
+    this.voiceMapping.set('denise douglas', 'FeJtVBW106P4mvgGebAg');
+    this.voiceMapping.set('brenda fitzburger', 'L4ndSW2PzthljqHuvso3');
+    this.voiceMapping.set('uncle baril', 'OYWwCdDHouzDwiZJWOOu');
+    this.voiceMapping.set('delaquarius montavius', '6OzrBCQf8cjERkYgzSg8');
   }
 
   setVoiceForCharacter(characterName: string, voiceId: string) {
@@ -59,12 +70,24 @@ class ConversationTTS {
   }
 
   private getVoiceForCharacter(character: Character): string {
-    // Try to find voice by character name first
-    const voiceId = this.voiceMapping.get(character.name.toLowerCase()) ||
-                   this.voiceMapping.get(character.title.toLowerCase()) ||
-                   this.voiceMapping.get('dr-jones'); // fallback to first voice
+    // Try multiple lookup strategies
+    const lookupKeys = [
+      character.id, // First try character ID
+      character.name.toLowerCase(), // Then character name
+      character.title.toLowerCase() // Then character title
+    ];
     
-    return voiceId || 'nPczCjzI2devNBz1zQrb'; // ultimate fallback
+    for (const key of lookupKeys) {
+      const voiceId = this.voiceMapping.get(key);
+      if (voiceId) {
+        console.log(`Found voice ${voiceId} for character ${character.name} using key: ${key}`);
+        return voiceId;
+      }
+    }
+    
+    // Fallback voice
+    console.warn(`No voice found for character ${character.name}, using fallback`);
+    return 'nPczCjzI2devNBz1zQrb';
   }
 
   async generateAudio(text: string, character: Character, options: TTSOptions = {}): Promise<Blob> {
@@ -92,7 +115,8 @@ class ConversationTTS {
     });
 
     if (!response.ok) {
-      throw new Error(`TTS API error: ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`TTS API error: ${response.status} - ${errorText}`);
     }
     return await response.blob();
   }
