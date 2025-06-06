@@ -1,4 +1,4 @@
-import { Groq } from 'npm:@groq/groq';
+import { Groq } from 'npm:groq-sdk@0.3.0';
 import { corsHeaders } from '../_shared/cors.ts';
 
 const groqApiKey = Deno.env.get('GROQ_API_KEY');
