@@ -12,23 +12,49 @@ export const generateConversation = async (
   turns: number = 5
 ): Promise<ConversationTurn[]> => {
   try {
+    // Ensure we have the required environment variables
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      throw new Error('Missing required Supabase configuration');
+    }
+
     const response = await fetch(
-      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-conversation`,
+      `${supabaseUrl}/functions/v1/generate-conversation`,
       {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Authorization': `Bearer ${supabaseAnonKey}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ host, guest, topic }),
+        body: JSON.stringify({ 
+          host: {
+            name: host.name,
+            title: host.title,
+            personality: host.personality
+          }, 
+          guest: {
+            name: guest.name,
+            title: guest.title,
+            personality: guest.personality
+          }, 
+          topic 
+        }),
       }
     );
 
     if (!response.ok) {
-      throw new Error('Failed to generate conversation');
+      const errorData = await response.text();
+      throw new Error(`API Error: ${response.status} - ${errorData}`);
     }
 
     const data = await response.json();
+    
+    if (!data.conversation) {
+      throw new Error('Invalid response format from edge function');
+    }
+
     const conversation = data.conversation;
 
     // Parse and format the conversation into turns
@@ -53,7 +79,7 @@ export const generateConversation = async (
     return formattedConversation;
   } catch (error) {
     console.error('Error generating conversation:', error);
-    // Fallback to static responses if the API fails
+    // Return a more informative error message in the fallback response
     return [
       {
         character: host,
@@ -70,6 +96,10 @@ export const generateConversation = async (
       {
         character: guest,
         text: 'Well, this is certainly an interesting topic to explore.',
+      },
+      {
+        character: host,
+        text: 'Note: This is a fallback conversation due to a technical issue with our conversation generator.',
       },
     ];
   }
