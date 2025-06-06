@@ -1,52 +1,9 @@
 import { Character } from '../data/characters';
-import { Groq } from 'groq-sdk';
 
 interface ConversationTurn {
   character: Character;
   text: string;
 }
-
-const groq = new Groq({
-  apiKey: import.meta.env.VITE_GROQ_API_KEY,
-});
-
-const generateCharacterPrompt = (character: Character, topic: string): string => {
-  return `You are ${character.name}, ${character.title}. Your personality traits are:
-${character.personality.map(trait => `- ${trait.trait}: ${trait.description}`).join('\n')}
-
-Your sample quote is: "${character.sampleQuote}"
-
-Generate a response about ${topic} that matches your character's unique personality and quirks. Keep the response concise (1-2 sentences) and stay true to your character's speech patterns and obsessions.`;
-};
-
-const generateResponse = async (character: Character, topic: string): Promise<string> => {
-  try {
-    const completion = await groq.chat.completions.create({
-      messages: [
-        {
-          role: 'system',
-          content: generateCharacterPrompt(character, topic),
-        },
-        {
-          role: 'user',
-          content: `What are your thoughts about ${topic}?`,
-        },
-      ],
-      model: 'mixtral-8x7b-32768',
-      temperature: 0.9,
-      max_tokens: 150,
-      top_p: 1,
-      stop: null,
-    });
-
-    return completion.choices[0]?.message?.content || 
-      `I have some interesting thoughts about ${topic} that I'd like to share.`;
-  } catch (error) {
-    console.error('Error generating response with Groq:', error);
-    // Fallback responses based on character
-    return getFallbackResponse(character, topic);
-  }
-};
 
 const getFallbackResponse = (character: Character, topic: string): string => {
   const fallbacks: Record<string, string[]> = {
@@ -76,6 +33,29 @@ const getFallbackResponse = (character: Character, topic: string): string => {
     `I have some interesting thoughts about ${topic} that I'd like to share.`,
   ];
   return characterFallbacks[Math.floor(Math.random() * characterFallbacks.length)];
+};
+
+const generateResponse = async (character: Character, topic: string): Promise<string> => {
+  try {
+    const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/generate-conversation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+      },
+      body: JSON.stringify({ character, topic }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to generate response');
+    }
+
+    const data = await response.json();
+    return data.response;
+  } catch (error) {
+    console.error('Error generating response:', error);
+    return getFallbackResponse(character, topic);
+  }
 };
 
 export const generateConversation = async (
