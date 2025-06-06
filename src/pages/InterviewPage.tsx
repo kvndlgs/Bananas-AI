@@ -36,7 +36,6 @@ const InterviewPage: React.FC = () => {
 
   const handleSelectHost = (character: Character) => {
     setSelectedHost(character);
-    // Prevent same character from being both host and guest
     if (selectedGuest?.id === character.id) {
       setSelectedGuest(undefined);
     }
@@ -44,51 +43,54 @@ const InterviewPage: React.FC = () => {
 
   const handleSelectGuest = (character: Character) => {
     setSelectedGuest(character);
-    // Prevent same character from being both host and guest
     if (selectedHost?.id === character.id) {
       setSelectedHost(undefined);
     }
   };
 
-  const handleCreateInterview = (topic: string) => {
+  const handleCreateInterview = async (topic: string) => {
     if (!selectedHost || !selectedGuest) return;
 
     setTopic(topic);
     setIsGenerating(true);
 
-    // Simulate generation delay
-    setTimeout(() => {
-      const newConversation = generateConversation(
+    try {
+      const newConversation = await generateConversation(
         selectedHost,
         selectedGuest,
         topic,
         5
       );
       setConversation(newConversation);
+    } catch (error) {
+      console.error('Error generating conversation:', error);
+    } finally {
       setIsGenerating(false);
-    }, 1500);
+    }
   };
 
   const handleTogglePlay = () => {
     setIsPlaying(!isPlaying);
   };
 
-  const handleRegenerateConversation = () => {
+  const handleRegenerateConversation = async () => {
     if (!selectedHost || !selectedGuest || !topic) return;
 
     setIsGenerating(true);
 
-    // Simulate generation delay
-    setTimeout(() => {
-      const newConversation = generateConversation(
+    try {
+      const newConversation = await generateConversation(
         selectedHost,
         selectedGuest,
         topic,
         5
       );
       setConversation(newConversation);
+    } catch (error) {
+      console.error('Error regenerating conversation:', error);
+    } finally {
       setIsGenerating(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -105,7 +107,6 @@ const InterviewPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Characters Selection */}
         <CharacterGrid
           characters={characters}
           selectedHost={selectedHost}
@@ -114,7 +115,6 @@ const InterviewPage: React.FC = () => {
           onSelectGuest={handleSelectGuest}
         />
 
-        {/* Interview Form */}
         <InterviewForm
           selectedHost={selectedHost}
           selectedGuest={selectedGuest}
@@ -122,7 +122,6 @@ const InterviewPage: React.FC = () => {
           isGenerating={isGenerating}
         />
 
-        {/* Conversation Display */}
         {conversation.length > 0 && (
           <ConversationDisplay
             conversation={conversation}
