@@ -1,74 +1,85 @@
-import { Groq } from 'npm:groq-sdk@1.0.1';
+import { Groq } from 'npm:@groq/groq';
 import { corsHeaders } from '../_shared/cors.ts';
 
-interface Character {
-  id: string;
-  name: string;
-  title: string;
-  personality: Array<{ trait: string; description: string }>;
-  sampleQuote: string;
+const groqApiKey = Deno.env.get('GROQ_API_KEY');
+if (!groqApiKey) {
+  throw new Error('GROQ_API_KEY is required');
 }
 
-interface RequestBody {
-  character: Character;
-  topic: string;
-}
-
-const generateCharacterPrompt = (character: Character, topic: string): string => {
-  return `You are ${character.name}, ${character.title}. Your personality traits are:
-${character.personality.map(trait => `- ${trait.trait}: ${trait.description}`).join('\n')}
-
-Your sample quote is: "${character.sampleQuote}"
-
-Generate a response about ${topic} that matches your character's unique personality and quirks. Keep the response concise (1-2 sentences) and stay true to your character's speech patterns and obsessions.`;
-};
+const groq = new Groq({
+  apiKey: groqApiKey,
+});
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders,
+    });
   }
 
   try {
-    const { character, topic } = await req.json() as RequestBody;
+    const { host, guest, topic } = await req.json();
 
-    const groq = new Groq({
-      apiKey: Deno.env.get('GROQ_API_KEY'),
-    });
+    if (!host || !guest || !topic) {
+      return new Response(
+        JSON.stringify({ error: 'Missing required parameters' }),
+        {
+          status: 400,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    }
+
+    const prompt = `Generate a podcast conversation between two characters:
+      Host: ${JSON.stringify(host)}
+      Guest: ${JSON.stringify(guest)}
+      Topic: ${topic}
+      
+      Generate a natural, engaging conversation that reflects each character's unique personality traits and quirks.
+      The conversation should be entertaining and stay true to each character's description.`;
 
     const completion = await groq.chat.completions.create({
       messages: [
         {
           role: 'system',
-          content: generateCharacterPrompt(character, topic),
+          content: 'You are a creative writer specializing in character-driven dialogue.',
         },
         {
           role: 'user',
-          content: `What are your thoughts about ${topic}?`,
+          content: prompt,
         },
       ],
       model: 'mixtral-8x7b-32768',
       temperature: 0.9,
-      max_tokens: 150,
-      top_p: 1,
-      stop: null,
+      max_tokens: 2048,
     });
 
-    const response = completion.choices[0]?.message?.content || 
-      `I have some interesting thoughts about ${topic} that I'd like to share.`;
+    const conversation = completion.choices[0]?.message?.content;
 
     return new Response(
-      JSON.stringify({ response }),
+      JSON.stringify({ conversation }),
       {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      },
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json',
+        },
+      }
     );
   } catch (error) {
+    console.error('Error:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: 'Failed to generate conversation' }),
       {
         status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      },
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'application/json',
+        },
+      }
     );
   }
 });
