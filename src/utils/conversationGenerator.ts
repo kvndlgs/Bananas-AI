@@ -12,7 +12,6 @@ export const generateConversation = async (
   turns: number = 5
 ): Promise<ConversationTurn[]> => {
   try {
-    // Ensure we have the required environment variables
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
@@ -20,33 +19,34 @@ export const generateConversation = async (
       throw new Error('Missing required Supabase configuration');
     }
 
-    const response = await fetch(
-      `${supabaseUrl}/functions/v1/generate-conversation`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${supabaseAnonKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          host: {
-            name: host.name,
-            title: host.title,
-            personality: host.personality
-          }, 
-          guest: {
-            name: guest.name,
-            title: guest.title,
-            personality: guest.personality
-          }, 
-          topic 
-        }),
-      }
-    );
+    // Add error handling for the URL construction
+    const functionUrl = new URL('/functions/v1/generate-conversation', supabaseUrl).toString();
+
+    const response = await fetch(functionUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${supabaseAnonKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        host: {
+          name: host.name,
+          title: host.title,
+          personality: host.personality
+        }, 
+        guest: {
+          name: guest.name,
+          title: guest.title,
+          personality: guest.personality
+        }, 
+        topic 
+      }),
+    });
 
     if (!response.ok) {
       const errorData = await response.text();
-      throw new Error(`API Error: ${response.status} - ${errorData}`);
+      console.error('Edge function error:', errorData);
+      throw new Error(`Edge function error: ${response.status} - ${errorData}`);
     }
 
     const data = await response.json();
@@ -79,28 +79,6 @@ export const generateConversation = async (
     return formattedConversation;
   } catch (error) {
     console.error('Error generating conversation:', error);
-    // Return a more informative error message in the fallback response
-    return [
-      {
-        character: host,
-        text: `Welcome to the show! Today we're discussing ${topic} with our special guest, ${guest.name}.`,
-      },
-      {
-        character: guest,
-        text: 'Thanks for having me! I\'m excited to share my thoughts on this topic.',
-      },
-      {
-        character: host,
-        text: 'Let\'s dive right in. What are your initial thoughts?',
-      },
-      {
-        character: guest,
-        text: 'Well, this is certainly an interesting topic to explore.',
-      },
-      {
-        character: host,
-        text: 'Note: This is a fallback conversation due to a technical issue with our conversation generator.',
-      },
-    ];
+    throw error; // Re-throw the error to be handled by the component
   }
 };
