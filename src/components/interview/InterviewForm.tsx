@@ -7,13 +7,17 @@ import { PodcastTTS, ConversationSegment } from '../../utils/textToSpeech';
 interface InterviewFormProps {
   selectedHost?: Character;
   selectedGuest?: Character;
-  onCreateInterview: (topic: string) => void;
+  topic: string;
+  onTopicChange: (topic: string) => void;
+  conversationStyle: 'debate' | 'interview' | 'casual' | 'podcast';
+  onStyleChange: (style: 'debate' | 'interview' | 'casual' | 'podcast') => void;
+  onCreateInterview: () => void;
   isGenerating: boolean;
 }
 
-// Usage Example
+// Usage Example//
 async function example(): Promise<void> {
-  const tts = new PodcastTTS(`${process.env.VITE_ELEVENLABS_API_KEY}`);
+  const tts = new PodcastTTS(`${import.meta.env.VITE_ELEVENLABS_API_KEY}`);
   
   // Example conversation data
   const conversation: ConversationSegment[] = [
@@ -44,6 +48,7 @@ const InterviewForm: React.FC<InterviewFormProps> = ({
   selectedGuest,
   onCreateInterview,
   isGenerating,
+  
 }) => {
   const [topic, setTopic] = useState('');
 
