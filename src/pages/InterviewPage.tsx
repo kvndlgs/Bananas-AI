@@ -4,7 +4,11 @@ import { Character } from '../data/characters';
 import CharacterGrid from '../components/characters/CharacterGrid';
 import InterviewForm from '../components/interview/InterviewForm';
 import ConversationDisplay from '../components/interview/ConversationDisplay';
+<<<<<<< HEAD
 import { useConversationGenerator } from '../utils/aiConversationGenerator';
+=======
+import { generateConversation } from '../utils/conversationGenerator';
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
 import { useAuth } from '../contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
 
@@ -13,6 +17,7 @@ interface ConversationTurn {
   text: string;
 }
 
+<<<<<<< HEAD
 interface PodcastGeneratorProps {
   onConversationGenerated?: (conversation: ConversationTurn[]) => void;
 }
@@ -20,6 +25,9 @@ interface PodcastGeneratorProps {
 
 
 const InterviewPage: React.FC<PodcastGeneratorProps> = ({onConversationGenerated}) => {
+=======
+const InterviewPage: React.FC = () => {
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
   const { user, isLoading } = useAuth();
   const [selectedHost, setSelectedHost] = useState<Character | undefined>();
   const [selectedGuest, setSelectedGuest] = useState<Character | undefined>();
@@ -27,6 +35,7 @@ const InterviewPage: React.FC<PodcastGeneratorProps> = ({onConversationGenerated
   const [conversation, setConversation] = useState<ConversationTurn[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+<<<<<<< HEAD
   const [conversationStyle, setConversationStyle] = useState<'debate' | 'interview' | 'casual' | 'podcast'>('podcast');
 
   const { generateConversation } = useConversationGenerator();
@@ -78,6 +87,8 @@ const handleGenerateConversation = async () => {
       handleGenerateConversation();
     }
   };
+=======
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
 
   if (isLoading) {
     return (
@@ -90,12 +101,73 @@ const handleGenerateConversation = async () => {
   if (!user) {
     return <Navigate to="/login" replace />;
   }
+<<<<<<< HEAD
   
+=======
+
+  const handleSelectHost = (character: Character) => {
+    setSelectedHost(character);
+    if (selectedGuest?.id === character.id) {
+      setSelectedGuest(undefined);
+    }
+  };
+
+  const handleSelectGuest = (character: Character) => {
+    setSelectedGuest(character);
+    if (selectedHost?.id === character.id) {
+      setSelectedHost(undefined);
+    }
+  };
+
+  const handleCreateInterview = async (topic: string) => {
+    if (!selectedHost || !selectedGuest) return;
+
+    setTopic(topic);
+    setIsGenerating(true);
+
+    try {
+      const newConversation = await generateConversation(
+        selectedHost,
+        selectedGuest,
+        topic,
+        5
+      );
+      setConversation(newConversation);
+    } catch (error) {
+      console.error('Error generating conversation:', error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
   const handleTogglePlay = () => {
     setIsPlaying(!isPlaying);
   };
 
+<<<<<<< HEAD
 
+=======
+  const handleRegenerateConversation = async () => {
+    if (!selectedHost || !selectedGuest || !topic) return;
+
+    setIsGenerating(true);
+
+    try {
+      const newConversation = await generateConversation(
+        selectedHost,
+        selectedGuest,
+        topic,
+        5
+      );
+      setConversation(newConversation);
+    } catch (error) {
+      console.error('Error regenerating conversation:', error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
 
   return (
     <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
@@ -111,6 +183,7 @@ const handleGenerateConversation = async () => {
           </p>
         </div>
 
+<<<<<<< HEAD
         {/* Characters Selection */}
         <CharacterGrid
           characters={characters}
@@ -133,13 +206,34 @@ const handleGenerateConversation = async () => {
         />
 
         {/* Conversation Display */}
+=======
+        <CharacterGrid
+          characters={characters}
+          selectedHost={selectedHost}
+          selectedGuest={selectedGuest}
+          onSelectHost={handleSelectHost}
+          onSelectGuest={handleSelectGuest}
+        />
+
+        <InterviewForm
+          selectedHost={selectedHost}
+          selectedGuest={selectedGuest}
+          onCreateInterview={handleCreateInterview}
+          isGenerating={isGenerating}
+        />
+
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
         {conversation.length > 0 && (
           <ConversationDisplay
             conversation={conversation}
             topic={topic}
             isPlaying={isPlaying}
             onTogglePlay={handleTogglePlay}
+<<<<<<< HEAD
             onRegenerate={handleRegenerate}
+=======
+            onRegenerate={handleRegenerateConversation}
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
           />
         )}
       </div>
@@ -147,4 +241,8 @@ const handleGenerateConversation = async () => {
   );
 };
 
+<<<<<<< HEAD
 export default InterviewPage;
+=======
+export default InterviewPage;
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1

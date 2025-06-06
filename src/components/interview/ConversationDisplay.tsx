@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useRef, useEffect } from 'react';
 import { Play, Pause, RefreshCw, Volume2, Download } from 'lucide-react';
 import Button from '../ui/Button';
@@ -7,6 +8,13 @@ import { Character } from '../../data/characters';
 const elevenLabsKey = import.meta.env.VITE_ELEVENLABS_API_KEY;
 
 
+=======
+import React from 'react';
+import { Play, Pause, RefreshCw } from 'lucide-react';
+import Button from '../ui/Button';
+import { Character } from '../../data/characters';
+
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
 interface ConversationTurn {
   character: Character;
   text: string;
@@ -15,6 +23,7 @@ interface ConversationTurn {
 interface ConversationDisplayProps {
   conversation: ConversationTurn[];
   topic: string;
+<<<<<<< HEAD
   onTogglePlay: () => void;
   onRegenerate: () => void;
   elevenLabsKey?: string;
@@ -152,11 +161,17 @@ class ConversationTTS {
 
     return audioSegments;
   }
+=======
+  isPlaying: boolean;
+  onTogglePlay: () => void;
+  onRegenerate: () => void;
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
 }
 
 const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
   conversation,
   topic,
+<<<<<<< HEAD
   onTogglePlay,
   onRegenerate,
 }) => {
@@ -288,6 +303,12 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
+=======
+  isPlaying,
+  onTogglePlay,
+  onRegenerate
+}) => {
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
   if (!conversation.length) return null;
 
   return (
@@ -298,6 +319,7 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
         </h2>
       </div>
 
+<<<<<<< HEAD
       {/* Audio Player */}
       <div className="bg-neutral-100 p-4 border-b border-neutral-200">
         <div className="flex items-center justify-between">
@@ -350,6 +372,26 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
                 Download
               </Button>
             )}
+=======
+      {/* Audio Player (Placeholder) */}
+      <div className="bg-gray-100 p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={onTogglePlay}
+              leftIcon={isPlaying ? <Pause size={16} /> : <Play size={16} />}
+            >
+              {isPlaying ? 'Pause' : 'Play'}
+            </Button>
+            <div className="ml-4 flex-1">
+              <div className="h-2 bg-gray-300 rounded-full w-full max-w-xs">
+                <div className="h-2 bg-primary rounded-full" style={{ width: '35%' }}></div>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">3:24 / 9:45</p>
+            </div>
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
           </div>
           <Button
             variant="outline"
@@ -360,6 +402,7 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
             Regenerate
           </Button>
         </div>
+<<<<<<< HEAD
 
         {/* Status messages */}
         <div className="mt-2">
@@ -389,10 +432,16 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
             </p>
           )}
         </div>
+=======
+        <p className="mt-2 text-sm text-gray-500 italic">
+          Note: Audio functionality coming soon!
+        </p>
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
       </div>
 
       {/* Conversation Transcript */}
       <div className="p-6">
+<<<<<<< HEAD
         <h3 className="text-lg font-semibold text-neutral-800 mb-4">Transcript</h3>
         <div className="space-y-6">
           {conversation.map((turn, index) => (
@@ -404,6 +453,12 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
                   : ''
               }`}
             >
+=======
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">Transcript</h3>
+        <div className="space-y-6">
+          {conversation.map((turn, index) => (
+            <div key={index} className="flex">
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
               <div 
                 className="flex-shrink-0 w-12 h-12 rounded-full overflow-hidden border-2"
                 style={{ borderColor: turn.character.backgroundColor }}
@@ -422,6 +477,7 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
                   >
                     {turn.character.name}
                   </h4>
+<<<<<<< HEAD
                   <span className="ml-2 text-xs text-neutral-500">
                     {turn.character.title}
                   </span>
@@ -430,6 +486,11 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
                       ● Playing
                     </span>
                   )}
+=======
+                  <span className="ml-2 text-xs text-gray-500">
+                    {turn.character.title}
+                  </span>
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
                 </div>
                 <div 
                   className="p-3 rounded-lg" 
@@ -438,7 +499,11 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
                     borderLeft: `3px solid ${turn.character.backgroundColor}`
                   }}
                 >
+<<<<<<< HEAD
                   <p className="text-neutral-800">{turn.text}</p>
+=======
+                  <p className="text-gray-800">{turn.text}</p>
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
                 </div>
               </div>
             </div>
@@ -449,4 +514,8 @@ const ConversationDisplay: React.FC<ConversationDisplayProps> = ({
   );
 };
 
+<<<<<<< HEAD
 export default ConversationDisplay;
+=======
+export default ConversationDisplay;
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1

@@ -29,8 +29,13 @@ const Button: React.FC<ButtonProps> = ({
   const variantStyles = {
     primary: 'bg-primary hover:bg-primary-dark text-white',
     secondary: 'bg-secondary hover:bg-secondary-dark text-white',
+<<<<<<< HEAD
     outline: 'border-2 border-banana text-banana hover:bg-primary/10',
     ghost: 'text-banana-400 hover:bg-/10',
+=======
+    outline: 'border-2 border-primary text-primary hover:bg-primary/10',
+    ghost: 'text-primary hover:bg-primary/10',
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
   };
   
   const sizeStyles = {

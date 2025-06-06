@@ -18,6 +18,7 @@ export default {
           light: '#FF9E75',
           dark: '#E06432',
         },
+<<<<<<< HEAD
         banana: {
           DEFAULT: '#FBE065',
           100: '#FEFAE6',
@@ -30,6 +31,8 @@ export default {
           800: '#4B3D02',
           900: '#191401',
         },
+=======
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
         secondary: {
           DEFAULT: '#8A69FC',
           100: '#EBE6FE',
@@ -67,10 +70,13 @@ export default {
         sans: ['Prompt', 'sans-serif'],
         display: ['"Prompt"', 'sans-serif'],
       },
+<<<<<<< HEAD
       fontSize: {
         xs: '13px',
         sm: '16px'
       },
+=======
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
       animation: {
         'bounce-slow': 'bounce 3s infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

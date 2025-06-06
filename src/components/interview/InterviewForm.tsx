@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { Mic, Sparkles } from 'lucide-react';
 import Button from '../ui/Button';
 import { Character } from '../../data/characters';
+<<<<<<< HEAD
 import { PodcastTTS, ConversationSegment } from '../../utils/textToSpeech';
+=======
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
 
 interface InterviewFormProps {
   selectedHost?: Character;
   selectedGuest?: Character;
+<<<<<<< HEAD
   topic: string;
   onTopicChange: (topic: string) => void;
   conversationStyle: 'debate' | 'interview' | 'casual' | 'podcast';
@@ -43,12 +47,21 @@ async function example(): Promise<void> {
   }
 }
 
+=======
+  onCreateInterview: (topic: string) => void;
+  isGenerating: boolean;
+}
+
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
 const InterviewForm: React.FC<InterviewFormProps> = ({
   selectedHost,
   selectedGuest,
   onCreateInterview,
   isGenerating,
+<<<<<<< HEAD
   
+=======
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
 }) => {
   const [topic, setTopic] = useState('');
 

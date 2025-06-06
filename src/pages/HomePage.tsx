@@ -10,6 +10,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
+<<<<<<< HEAD
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center">
@@ -18,6 +19,16 @@ const HomePage: React.FC = () => {
                 Generate Hilarious AI Podcast Conversations
               </h1>
               <p className="text-banana-600 text-opacity-90 text-lg mb-8 max-w-lg">
+=======
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-light via-primary to-secondary">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center">
+            <div className="md:w-1/2 mb-10 md:mb-0">
+              <h1 className="text-4xl md:text-5xl font-display font-bold text-white leading-tight mb-4">
+                Generate Hilarious AI Podcast Conversations
+              </h1>
+              <p className="text-white text-opacity-90 text-lg mb-8 max-w-lg">
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
                 Create absurd podcast episodes featuring our cast of unhinged
                 characters with bizarre personality quirks.
               </p>
@@ -48,13 +59,21 @@ const HomePage: React.FC = () => {
             <div className="md:w-1/2 flex justify-center">
               <div className="relative w-80 h-80">
                 <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+<<<<<<< HEAD
                   <Banana className="w-40 h-40 text-banana-400 animate-float" />
+=======
+                  <Banana className="w-40 h-40 text-white animate-float" />
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
                 </div>
                 <div className="absolute -top-4 -right-4 bg-white rounded-full p-3 shadow-lg animate-bounce-slow">
                   <Mic className="w-8 h-8 text-primary" />
                 </div>
                 <div className="absolute -bottom-4 -left-4 bg-white rounded-full p-3 shadow-lg animate-pulse-slow">
+<<<<<<< HEAD
                   <Sparkles className="w-8 h-8 text-banana-600" />
+=======
+                  <Sparkles className="w-8 h-8 text-secondary" />
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
                 </div>
               </div>
             </div>
@@ -91,7 +110,11 @@ const HomePage: React.FC = () => {
               title="Save Your Favorites"
               description="Sign in to save your favorite generated podcasts and share them with friends."
             />
+<<<<<<< HEAD
           </div>``
+=======
+          </div>
+>>>>>>> 8dde1f7c81b1fb9df72cceb1a6e501e050d093c1
         </div>
       </section>
 
