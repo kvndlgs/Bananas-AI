@@ -61,11 +61,11 @@ export const generateConversation = async (
       },
       {
         character: guest,
-        text: 'Thanks for having me! I'm excited to share my thoughts on this topic.',
+        text: 'Thanks for having me! I\'m excited to share my thoughts on this topic.',
       },
       {
         character: host,
-        text: 'Let's dive right in. What are your initial thoughts?',
+        text: 'Let\'s dive right in. What are your initial thoughts?',
       },
       {
         character: guest,
